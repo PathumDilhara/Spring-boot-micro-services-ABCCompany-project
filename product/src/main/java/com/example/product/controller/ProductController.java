@@ -17,7 +17,14 @@ public class ProductController {
 
     @GetMapping("/getAllProducts")
     public List<ProductDTO> getAllProducts() {
+
         return productServices.getAllProducts();
+    }
+
+    @GetMapping("/getProductsByProductId/{productId}")
+    public ProductDTO getProductsByProductId(@PathVariable int productId) {
+
+        return productServices.getProductsByProductId(productId);
     }
 
     @PostMapping("saveProduct")

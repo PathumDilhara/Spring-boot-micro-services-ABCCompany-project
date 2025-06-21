@@ -25,6 +25,10 @@ public class InventoryService {
        List<Inventory> inventories = inventoryRepo.findAll();
        return modelMapper.map(inventories, new TypeToken<List<InventoryDTO>>(){}.getType());
     }
+    public InventoryDTO getInventoryItemByItemId(Integer itemId){
+        Inventory inventoryItem =  inventoryRepo.findInventoryItemByItemId(itemId);
+        return modelMapper.map(inventoryItem, InventoryDTO.class);
+    }
 
     public InventoryDTO saveInventory(InventoryDTO inventoryDTO){
         Inventory inventory = modelMapper.map(inventoryDTO, Inventory.class);
