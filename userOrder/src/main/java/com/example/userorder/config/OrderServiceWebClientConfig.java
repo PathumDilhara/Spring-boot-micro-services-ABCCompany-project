@@ -1,5 +1,6 @@
 package com.example.userorder.config;
 
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -8,17 +9,18 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class OrderServiceWebClientConfig {
 
     @Bean
-    public WebClient webClient() {
-        return WebClient.builder().build();
+    @LoadBalanced
+    public WebClient.Builder webClient() {
+        return WebClient.builder();
     }
 
     @Bean
     public WebClient inventoryWebClient(){
-        return WebClient.builder().baseUrl("http://localhost:8082/api/v1").build();
+        return webClient().baseUrl("http://Inventory/api/v1").build();
     }
 
     @Bean
     public WebClient productWebClient(){
-        return WebClient.builder().baseUrl("http://localhost:8080/api/v1").build();
+        return webClient().baseUrl("http://Product/api/v1").build();
     }
 }

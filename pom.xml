@@ -20,7 +20,27 @@
     <module>userOrder</module>
     <module>inventory</module>
       <module>base</module>
+      <module>discovery-server</module>
   </modules>
+
+  <!--   Need for installing dependency Eureka-->
+  <properties>
+    <java.version>17</java.version>
+    <spring-cloud.version>2025.0.0</spring-cloud.version>
+  </properties>
+
+  <!--   Need for installing dependency Eureka-->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
