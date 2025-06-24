@@ -3,6 +3,7 @@ package com.example.inventory.services;
 import com.example.inventory.dto.InventoryDTO;
 import com.example.inventory.entity.Inventory;
 import com.example.inventory.repo.InventoryRepo;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -25,9 +26,9 @@ public class InventoryService {
        List<Inventory> inventories = inventoryRepo.findAll();
        return modelMapper.map(inventories, new TypeToken<List<InventoryDTO>>(){}.getType());
     }
-    public InventoryDTO getInventoryItemByItemId(Integer itemId){
+    public InventoryDTO getInventoryItemByItemId(int itemId){
         Inventory inventoryItem =  inventoryRepo.findInventoryItemByItemId(itemId);
-        return modelMapper.map(inventoryItem, InventoryDTO.class);
+        return modelMapper.map(inventoryItem, new TypeToken<InventoryDTO>(){}.getType());
     }
 
     public InventoryDTO saveInventory(InventoryDTO inventoryDTO){

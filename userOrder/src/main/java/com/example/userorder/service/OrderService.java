@@ -46,26 +46,30 @@ public class OrderService {
     }
 
     public OrderResponse saveOrderDTO(UserOrderDTO userOrderDTO){
-
+        System.out.println("################## service"+userOrderDTO);
         Integer itemId = userOrderDTO.getItemId();
 
         try {
-          InventoryDTO inventoryDTOResponse =   inventoryWebClient.get().uri(uriBuilder -> uriBuilder.path("/inventory/getItemByItemId/{itemId}").build(itemId))
+            System.out.println("############## trying "+inventoryWebClient);
+
+          InventoryDTO inventoryDTOResponse = inventoryWebClient.get().uri(uriBuilder -> uriBuilder.path("/inventoryItem/{itemId}").build(itemId))
                     .retrieve()
                     .bodyToMono(InventoryDTO.class)
                     .block();
 
-
+            System.out.println("################## nullchek" + inventoryDTOResponse);
           assert inventoryDTOResponse != null;
 
-//            System.out.println(inventoryDTO);
+            System.out.println("################## " + inventoryDTOResponse);
 
             Integer productId = userOrderDTO.getItemId(); // itemId = productId in this scenario
 
-            ProductDTO productDTOResponse =   productWebClient.get().uri(uriBuilder -> uriBuilder.path("/product/getProductsByProductId/{productId}").build(productId))
+            ProductDTO productDTOResponse = productWebClient.get().uri(uriBuilder -> uriBuilder.path("/product/{productId}").build(productId))
                     .retrieve()
                     .bodyToMono(ProductDTO.class)
                     .block();
+
+            System.out.println("################## nullchek "+productDTOResponse);
 
             assert productDTOResponse != null;
 
@@ -80,6 +84,7 @@ public class OrderService {
                 return new ErrorOrderResponse("Item not available 0 )");
             }
         } catch (WebClientResponseException err){
+            System.out.println("################### "+err.getMessage());
             if(err.getStatusCode().is5xxServerError()){
                 return new ErrorOrderResponse("Item not found");
             }

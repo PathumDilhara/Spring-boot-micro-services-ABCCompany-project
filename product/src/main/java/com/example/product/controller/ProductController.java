@@ -15,19 +15,19 @@ public class ProductController {
     @Autowired
     private ProductServices productServices;
 
-    @GetMapping("/getAllProducts")
+    @GetMapping("/all")
     public List<ProductDTO> getAllProducts() {
 
         return productServices.getAllProducts();
     }
 
-    @GetMapping("/getProductsByProductId/{productId}")
+    @GetMapping("/{productId}")
     public ProductDTO getProductsByProductId(@PathVariable int productId) {
-
+        System.out.println("######## Received request for product id={}"+ productId);
         return productServices.getProductsByProductId(productId);
     }
 
-    @PostMapping("saveProduct")
+    @PostMapping("/saveProduct")
     public ProductDTO saveProduct(@RequestBody ProductDTO productDTO) {
         return productServices.saveProduct(productDTO);
     }

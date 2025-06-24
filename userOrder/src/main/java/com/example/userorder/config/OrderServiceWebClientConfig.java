@@ -10,17 +10,17 @@ public class OrderServiceWebClientConfig {
 
     @Bean
     @LoadBalanced
-    public WebClient.Builder webClient() {
+    public WebClient.Builder webClientBuilder() {
         return WebClient.builder();
     }
 
     @Bean
     public WebClient inventoryWebClient(){
-        return webClient().baseUrl("http://Inventory/api/v1").build();
+        return webClientBuilder().baseUrl("http://apigateway/api/v1").build();
     }
 
     @Bean
     public WebClient productWebClient(){
-        return webClient().baseUrl("http://Product/api/v1").build();
+        return webClientBuilder().baseUrl("http://apigateway/api/v1").build();
     }
 }

@@ -21,13 +21,15 @@ public class OrderController {
     @Autowired
     private OrderProducer orderProducer;
 
-    @GetMapping("/getAllOrders")
+    @GetMapping("/getAll")
     public List<UserOrderDTO> getAllOrders(){
         return orderService.getAllOrders();
     }
 
-    @PostMapping("/saveOrder")
+    @PostMapping("/addOrder")
     public OrderResponse saveOrder(@RequestBody UserOrderDTO orderDTO){
+        System.out.println("############### saving order");
+
         OrderEventDTO orderEventDTO = new OrderEventDTO();
         orderEventDTO.setMessage("Order is Commited 1");
         orderEventDTO.setStatus("pending");
@@ -41,7 +43,7 @@ public class OrderController {
         return orderService.updateOrder(orderDTO);
     }
 
-    @DeleteMapping("/deleteOrders")
+    @DeleteMapping("/deleteOrder")
     public boolean deleteOrder(@RequestBody UserOrderDTO orderDTO){
         return orderService.deleteOrder(orderDTO);
     }

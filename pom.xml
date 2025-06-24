@@ -21,6 +21,7 @@
     <module>inventory</module>
       <module>base</module>
       <module>discovery-server</module>
+      <module>api-gateway</module>
   </modules>
 
   <!--   Need for installing dependency Eureka-->
